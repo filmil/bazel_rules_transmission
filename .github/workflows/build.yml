@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libtinfo5
       - name: Setup bazel
         uses: abhinavsingh/setup-bazel@v3
         with:
