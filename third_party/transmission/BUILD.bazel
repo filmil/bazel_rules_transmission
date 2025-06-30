@@ -30,7 +30,7 @@ cmake(
     ],
     build_args = [
         "--verbose",
-        "--parallel 2",
+        "--parallel 8",
     ],
     out_static_libs = ["libtransmission.a"],
     out_binaries = [
