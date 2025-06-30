@@ -6,9 +6,5 @@ make(
     name = "libnatpmp",
     lib_source = "@libnatpmp//:all",
     targets = ["install INSTALLPREFIX=$$INSTALLDIR$$"],
-    env = {
-        "CFLAGS": "-x c",
-        "CXXFLAGS": "-x c",
-    },
     out_lib_dir = "lib64",
 )

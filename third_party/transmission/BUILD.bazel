@@ -7,7 +7,6 @@ cmake(
     lib_source = "@transmission//:all",
     generate_args = [
         "-DCMAKE_BUILD_TYPE=Release",
-        "-DDHT_PREFER_STATIC_LIB=ON",
         "-DENABLE_CLI=ON",
         "-DENABLE_DAEMON=ON",
         "-DENABLE_GTK=OFF",
@@ -16,12 +15,11 @@ cmake(
         "-DENABLE_TESTS=OFF",
         "-DENABLE_UTILS=ON",
         "-DREBUILD_WEB=OFF",
-        "-DNATPMP_PREFER_STATIC_LIB=ON",
         "-DWITH_CRYPTO=openssl",
     ],
-    copts = [
-        "-std=c++20",
-        "-static",
+    build_args = [
+        "--verbose",
+        "--parallel 8",
     ],
     out_static_libs = [
         "libtransmission.a",
@@ -35,5 +33,5 @@ cmake(
         "@libevent//:event_openssl",
         "//third_party/libnatpmp",
         "@libdht//:libdht",
-    ]
+    ],
 )
