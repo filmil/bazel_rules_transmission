@@ -15,10 +15,13 @@ cmake(
         "-DENABLE_QT=OFF",
         "-DENABLE_TESTS=OFF",
         "-DENABLE_UTILS=ON",
+        "-DREBUILD_WEB=OFF",
         "-DNATPMP_PREFER_STATIC_LIB=ON",
+        "-DWITH_CRYPTO=openssl",
     ],
     copts = [
         "-std=c++20",
+        "-static",
     ],
     out_static_libs = [
         "libtransmission.a",
@@ -30,7 +33,6 @@ cmake(
         "@libevent//:event_core",
         "@libevent//:event_extra",
         "@libevent//:event_openssl",
-        "@googletest//:gtest",
         "//third_party/libnatpmp",
         "@libdht//:libdht",
     ]
