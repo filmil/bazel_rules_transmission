@@ -2,26 +2,15 @@
 
 [![Build](https://github.com/filmil/bazel_rules_transmission/actions/workflows/build.yml/badge.svg)](https://github.com/filmil/bazel_rules_transmission/actions/workflows/build.yml)
 
-This repository provides Bazel rules for building the [Transmission](https://transmissionbt.com/) BitTorrent client.
+This repository provides Bazel rules for building the
+[Transmission](https://transmissionbt.com/) BitTorrent client.
 
-## Usage
+# Maintenance
 
-To use these rules, add the following to your `MODULE.bazel` file:
+## Build
 
-```starlark
-bazel_dep(name = "rules_transmission", version = "0.0.1")
 ```
-
-## Building Transmission
-
-To build Transmission, you can use the provided rules in your `BUILD.bazel` file. For example:
-
-```starlark
-load("@rules_transmission//third_party/transmission:transmission.bzl", "transmission")
-
-transmission(
-    name = "my_transmission",
-)
+bazel build //third_party/transmission/...
 ```
 
 This will build the Transmission client and all of its dependencies.
