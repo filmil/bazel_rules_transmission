@@ -1,0 +1,34 @@
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
+
+package(default_visibility = ["//visibility:public"])
+
+cmake(
+    name = "transmission",
+    lib_source = "@transmission//:all",
+    generate_args = [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DENABLE_CLI=ON",
+        "-DENABLE_DAEMON=ON",
+        "-DENABLE_GTK=OFF",
+        "-DENABLE_MAC=OFF",
+        "-DENABLE_QT=OFF",
+        "-DENABLE_TESTS=OFF",
+        "-DENABLE_UTILS=ON",
+    ],
+    copts = [
+        "-std=c++20",
+    ],
+    out_static_libs = [
+        "libtransmission.a",
+    ],
+    deps = [
+        "@curl//:curl",
+        "@openssl//:ssl",
+        "@libdeflate//:deflate",
+        "@libevent//:event_core",
+        "@libevent//:event_extra",
+        "@libevent//:event_openssl",
+        "@googletest//:gtest",
+        "//third_party/libnatpmp",
+    ]
+)

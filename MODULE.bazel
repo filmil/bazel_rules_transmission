@@ -1,0 +1,39 @@
+module(
+    name = "bazel_transmission",
+    version = "0.1.0",
+)
+
+bazel_dep(name = "rules_foreign_cc", version = "0.15.0")
+bazel_dep(name = "libarchive", version = "3.7.2")
+bazel_dep(name = "toolchains_musl", version = "0.1.20", dev_dependency = True)
+bazel_dep(name = "curl", version = "8.8.0.bcr.3", dev_dependency = True)
+bazel_dep(name = "openssl", version = "3.3.1.bcr.3", dev_dependency = True)
+bazel_dep(name = "libdeflate", version = "1.24", dev_dependency = True)
+bazel_dep(name = "libevent", version = "2.1.12-stable.bcr.0", dev_dependency = True)
+bazel_dep(name = "googletest", version = "1.17.0")
+
+git_repository = use_repo_rule(
+    "@bazel_tools//tools/build_defs/repo:git.bzl",
+    "git_repository")
+
+git_repository(
+    name = "transmission",
+    commit = "d6e78d11ea706b6d6bf95042756483a40baf873b",
+    remote = "https://github.com/transmission/transmission.git",
+    build_file = "//third_party/transmission:transmission.BUILD.bazel",
+    recursive_init_submodules = True,
+)
+
+git_repository(
+    name = "libnatpmp",
+    commit = "134fc89e2781e154e40042641f4d8bcbe42579f1",
+    remote = "https://github.com/miniupnp/libnatpmp.git",
+    build_file = "//third_party/libnatpmp:libnatpmp.BUILD.bazel",
+    recursive_init_submodules = True,
+    patch_args = [
+        "-p1",
+    ],
+    patches = [
+        "//third_party/libnatpmp:0001-fix-don-t-build-shared-lib.patch",
+    ]
+)
