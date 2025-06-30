@@ -37,3 +37,11 @@ git_repository(
         "//third_party/libnatpmp:0001-fix-don-t-build-shared-lib.patch",
     ]
 )
+
+git_repository(
+    name = "libdht",
+    commit = "0bbb8f4a5bd914b60de5e9fbb51573aa33a1cf18",
+    remote = "https://github.com/jech/dht.git",
+    build_file = "//third_party/libdht:libdht.BUILD.bazel",
+    recursive_init_submodules = True,
+)

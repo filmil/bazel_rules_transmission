@@ -7,6 +7,7 @@ cmake(
     lib_source = "@transmission//:all",
     generate_args = [
         "-DCMAKE_BUILD_TYPE=Release",
+        "-DDHT_PREFER_STATIC_LIB=ON",
         "-DENABLE_CLI=ON",
         "-DENABLE_DAEMON=ON",
         "-DENABLE_GTK=OFF",
@@ -14,6 +15,7 @@ cmake(
         "-DENABLE_QT=OFF",
         "-DENABLE_TESTS=OFF",
         "-DENABLE_UTILS=ON",
+        "-DNATPMP_PREFER_STATIC_LIB=ON",
     ],
     copts = [
         "-std=c++20",
@@ -30,5 +32,6 @@ cmake(
         "@libevent//:event_openssl",
         "@googletest//:gtest",
         "//third_party/libnatpmp",
+        "@libdht//:libdht",
     ]
 )
