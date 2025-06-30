@@ -15,20 +15,65 @@ cmake(
         "-DENABLE_TESTS=OFF",
         "-DENABLE_UTILS=ON",
         "-DREBUILD_WEB=OFF",
+        # Only system openssl can be used.  Attempting to provide deps results
+        # in wrong linking. This should be fixed but I'm not in it for now.
         "-DWITH_CRYPTO=openssl",
+        "-DWITH_OPENSSL=ON",
+        # Use the library sources provided in the third-party repositories.
+        "-DUSE_SYSTEM_DHT=OFF",
+        "-DUSE_SYSTEM_DEFLATE=OFF",
+        "-DUSE_SYSTEM_EVENT2=OFF",
+        "-DUSE_SYSTEM_NATPMP=OFF",
+        # Install libtransmission.a. This is necessary for this build rule to
+        # succeed.
+        "-DINSTALL_LIB=TRUE",
     ],
     build_args = [
         "--verbose",
         "--parallel 8",
     ],
-    deps = [
-        #"@libdeflate//:deflate",
-        "@curl//:curl",
-        "@openssl//:ssl",
-        #"@libevent//:event_core",
-        #"@libevent//:event_extra",
-        #"@libevent//:event_openssl",
-        #"//third_party/libnatpmp",
-        #"@libdht//:libdht",
+    out_static_libs = ["libtransmission.a"],
+    out_binaries = [
+        "transmission-cli",
+        "transmission-daemon",
     ],
+    deps = [
+        # libcurl is not hermetic. :(
+        #"@curl//:curl",
+        "@openssl//:ssl",
+    ],
+)
+
+filegroup(
+    name = "transmission-cli",
+    srcs = [":transmission"],
+    output_group = "transmission-cli",
+)
+
+filegroup(
+    name = "transmission-daemon",
+    srcs = [":transmission"],
+    output_group = "transmission-daemon",
+)
+
+genrule(
+    name = "testcli",
+    outs = ["report-cli.txt"],
+    tools = [
+        ":transmission-cli",
+    ],
+    cmd = """
+      $(location :transmission-cli) --help > $(OUTS)
+    """
+)
+
+genrule(
+    name = "testdaemon",
+    outs = ["report-daemon.txt"],
+    tools = [
+        ":transmission-daemon",
+    ],
+    cmd = """
+      $(location :transmission-daemon) --help > $(OUTS)
+    """
 )

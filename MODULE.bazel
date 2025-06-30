@@ -6,14 +6,17 @@ module(
 bazel_dep(name = "rules_foreign_cc", version = "0.15.0")
 bazel_dep(name = "openssl", version = "3.3.1.bcr.3", dev_dependency = True)
 bazel_dep(name = "curl", version = "8.8.0.bcr.3", dev_dependency = True)
+bazel_dep(name = "libevent", version = "2.1.12-stable.bcr.0")
+bazel_dep(name = "libdeflate", version = "1.24")
 
-bazel_dep(name = "hermetic_cc_toolchain", version = "4.0.1")
-toolchains = use_extension("@hermetic_cc_toolchain//toolchain:ext.bzl", "toolchains")
-use_repo(toolchains, "zig_sdk") # No idea why zig is a thing here.
-register_toolchains(
-    "@zig_sdk//toolchain/...",
-    "@zig_sdk//libc_aware/toolchain/...",
-)
+#bazel_dep(name = "toolchains_musl", version = "0.1.20")
+#bazel_dep(name = "hermetic_cc_toolchain", version = "4.0.1")
+#toolchains = use_extension("@hermetic_cc_toolchain//toolchain:ext.bzl", "toolchains")
+#use_repo(toolchains, "zig_sdk") # No idea why zig is a thing here.
+#register_toolchains(
+    #"@zig_sdk//toolchain/...",
+    #"@zig_sdk//libc_aware/toolchain/...",
+#)
 
 git_repository = use_repo_rule(
     "@bazel_tools//tools/build_defs/repo:git.bzl",
