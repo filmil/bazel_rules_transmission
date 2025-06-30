@@ -21,17 +21,14 @@ cmake(
         "--verbose",
         "--parallel 8",
     ],
-    out_static_libs = [
-        "libtransmission.a",
-    ],
     deps = [
-        "@libdeflate//:deflate",
+        #"@libdeflate//:deflate",
         "@curl//:curl",
         "@openssl//:ssl",
-        "@libevent//:event_core",
-        "@libevent//:event_extra",
-        "@libevent//:event_openssl",
-        "//third_party/libnatpmp",
-        "@libdht//:libdht",
+        #"@libevent//:event_core",
+        #"@libevent//:event_extra",
+        #"@libevent//:event_openssl",
+        #"//third_party/libnatpmp",
+        #"@libdht//:libdht",
     ],
 )
