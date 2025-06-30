@@ -25,9 +25,9 @@ cmake(
         "libtransmission.a",
     ],
     deps = [
+        "@libdeflate//:deflate",
         "@curl//:curl",
         "@openssl//:ssl",
-        "@libdeflate//:deflate",
         "@libevent//:event_core",
         "@libevent//:event_extra",
         "@libevent//:event_openssl",
