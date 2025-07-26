@@ -21,16 +21,25 @@ cmake(
         "-DWITH_OPENSSL=ON",
         # Use the library sources provided in the third-party repositories.
         "-DUSE_SYSTEM_DHT=OFF",
-        "-DUSE_SYSTEM_DEFLATE=OFF",
         "-DUSE_SYSTEM_EVENT2=OFF",
         "-DUSE_SYSTEM_NATPMP=OFF",
+        "-DCURL_PREFER_STATIC_LIB=ON",
+        "-DDEFLATE_PREFER_STATIC_LIB=ON",
         # Install libtransmission.a. This is necessary for this build rule to
         # succeed.
         "-DINSTALL_LIB=TRUE",
+        # Try to turn off AVX, since it seems that the MUSL assembler does not
+        # support it.
+        "-DUSE_AVX=OFF",
+        # Concession to broken build system.
+        "-DUSE_SYSTEM_DEFLATE=OFF",
     ],
     build_args = [
         "--verbose",
-        "--parallel 8",
+        #"--parallel", "3",
+    ],
+    linkopts = [
+        "-lstdc++",
     ],
     out_static_libs = ["libtransmission.a"],
     out_binaries = [
@@ -39,7 +48,7 @@ cmake(
     ],
     deps = [
         # libcurl is not hermetic. :(
-        #"@curl//:curl",
+        "@curl//:curl",
         "@openssl//:ssl",
     ],
 )
