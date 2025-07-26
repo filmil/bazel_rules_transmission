@@ -9,7 +9,7 @@ bazel_dep(name = "curl", version = "8.8.0.bcr.3", dev_dependency = True)
 bazel_dep(name = "libevent", version = "2.1.12-stable.bcr.0")
 bazel_dep(name = "libdeflate", version = "1.24")
 
-#bazel_dep(name = "toolchains_musl", version = "0.1.20")
+#bazel_dep(name = "toolchains_musl", version = "0.1.27")
 
 bazel_dep(name = "toolchains_llvm", version = "1.4.0")
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
@@ -33,8 +33,10 @@ git_repository = use_repo_rule(
 
 git_repository(
     name = "transmission",
-    commit = "d6e78d11ea706b6d6bf95042756483a40baf873b",
-    remote = "https://github.com/transmission/transmission.git",
+    #commit = "d6e78d11ea706b6d6bf95042756483a40baf873b",
+    commit = "b6a254bf6196d6f75ded0c0ee4db9770266979c9",
+    #remote = "https://github.com/transmission/transmission.git",
+    remote = "https://github.com/filmil/transmission.git",
     build_file = "//third_party/transmission:transmission.BUILD.bazel",
     recursive_init_submodules = True,
 )
