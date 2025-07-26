@@ -14,7 +14,7 @@ bazel_dep(name = "libdeflate", version = "1.24")
 bazel_dep(name = "toolchains_llvm", version = "1.4.0")
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 llvm.toolchain(
-   llvm_version = "16.0.0",
+   llvm_version = "19.1.0",
 )
 use_repo(llvm, "llvm_toolchain")
 register_toolchains("@llvm_toolchain//:all")
