@@ -4,8 +4,8 @@ module(
 )
 
 bazel_dep(name = "rules_foreign_cc", version = "0.15.0")
-bazel_dep(name = "openssl", version = "3.3.1.bcr.3", dev_dependency = True)
-bazel_dep(name = "curl", version = "8.8.0.bcr.3", dev_dependency = True)
+bazel_dep(name = "openssl", version = "3.3.1.bcr.1")
+bazel_dep(name = "curl", version = "8.8.0.bcr.3")
 bazel_dep(name = "libevent", version = "2.1.12-stable.bcr.0")
 bazel_dep(name = "libdeflate", version = "1.24")
 
@@ -34,7 +34,7 @@ git_repository = use_repo_rule(
 git_repository(
     name = "transmission",
     #commit = "d6e78d11ea706b6d6bf95042756483a40baf873b",
-    commit = "b6a254bf6196d6f75ded0c0ee4db9770266979c9",
+    commit = "31557e4bc7c7e2cb0913d0aeaac664c165532ce3",
     #remote = "https://github.com/transmission/transmission.git",
     remote = "https://github.com/filmil/transmission.git",
     build_file = "//third_party/transmission:transmission.BUILD.bazel",
