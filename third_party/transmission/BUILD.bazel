@@ -13,7 +13,7 @@ cmake(
         "-DENABLE_MAC=OFF",
         "-DENABLE_QT=OFF",
         "-DENABLE_TESTS=OFF",
-        "-DENABLE_UTILS=OFF",
+        "-DENABLE_UTILS=ON",
         "-DREBUILD_WEB=OFF",
         # Only system openssl can be used.  Attempting to provide deps results
         # in wrong linking. This should be fixed but I'm not in it for now.
@@ -30,6 +30,8 @@ cmake(
         # Install libtransmission.a. This is necessary for this build rule to
         # succeed.
         "-DINSTALL_LIB=TRUE",
+        # Why is this even a thing?!
+        "-DRUN_CLANG_TIDY=OFF",
     ],
     build_args = [
         "--verbose",
@@ -38,7 +40,11 @@ cmake(
     out_static_libs = ["libtransmission.a"],
     out_binaries = [
         "transmission-cli",
+        "transmission-create",
         "transmission-daemon",
+        "transmission-edit",
+        "transmission-remote",
+        "transmission-show",
     ],
     deps = [
         "@curl//:curl",
@@ -59,6 +65,15 @@ filegroup(
     srcs = [":transmission"],
     output_group = "transmission-daemon",
 )
+
+filegroup(
+    name = "transmission-create",
+    srcs = [":transmission"],
+    output_group = "transmission-create",
+)
+
+
+# Add filegropus for other binaries if needed.
 
 genrule(
     name = "testcli",
